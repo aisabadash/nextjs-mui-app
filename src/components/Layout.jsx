@@ -7,10 +7,10 @@ const Layout = ({ children }) => {
     <>
       <SeoHead />
       <AppNavBar />
-      <Box component="main">
-         <Container maxWidth="lg">
-            {children}
-         </Container>
+      <Box component="main" sx={{ minHeight: '100vh', padding: 2, maxWidth: 'lg', mx: 'auto' }}>
+          <Container>
+              {children}
+          </Container>
       </Box>
     </>
   );
