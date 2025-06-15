@@ -1,8 +1,22 @@
 {
   "meta_title": "Skupina",
   "meta_description": "Skupina - Popis",
-  "welcome": "Vítejte!",
-  "menu_about": "O nás",
-  "menu_gallery": "Galerie",
-  "menu_contacts": "Kontakty"
+  "nav": {
+    "home": "Domů",
+    "about": "O nás",
+    "program": "Programy",
+    "contact": "Kontakty"
+  },
+  "home-page": {
+    "title": "Vítejte!"
+  },
+  "about-page": {
+    "title": "Stránka O nás"
+  },
+  "program-page": {
+    "title": "Stránka Programy"
+  },
+  "contact-page": {
+    "title": "Stránka Kontakty"
+  }
 }

@@ -1,8 +1,22 @@
 {
   "meta_title": "Група",
   "meta_description": "Група - Опис",
-  "welcome": "Ласкаво просимо!",
-  "menu_about": "Про нас",
-  "menu_gallery": "Галерея",
-  "menu_contacts": "Контакти"
+  "nav": {
+    "home": "Головна",
+    "about": "Про нас",
+    "program": "Програми",
+    "contact": "Контакти"
+  },
+  "home-page": {
+    "title": "Ласкаво просимо!"
+  },
+  "about-page": {
+    "title": "Сторінка Про Нас"
+  },
+  "program-page": {
+    "title": "Сторінка Програми"
+  },
+  "contact-page": {
+    "title": "Сторінка Контакти"
+  }
 }
