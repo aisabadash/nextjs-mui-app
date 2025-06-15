@@ -16,6 +16,7 @@ import {
   ListItemText,
   Button,
   useScrollTrigger,
+  Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'next-i18next';
@@ -76,35 +77,40 @@ const AppNavBar = ({ window }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <ElevationScroll>
-        <AppBar component="nav">
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            >
-              MUI
-            </Typography>
-            <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
-              {navItems.map((item) => (
-                <Button key={item.url} component={Link} href={item.url} sx={{ color: '#fff' }}>
-                  {item.title}
-                </Button>
-              ))}
-            </Box>
-            <Box sx={{ ml: 'auto' }}>
-              <LanguageSwitcher />
-            </Box>
-          </Toolbar>
+        <AppBar component="nav" position="fixed">
+          <Container maxWidth="lg">
+            <Toolbar disableGutters>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
+
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              >
+                MUI
+              </Typography>
+
+              <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
+                {navItems.map((item) => (
+                  <Button key={item.url} component={Link} href={item.url} sx={{ color: '#fff' }}>
+                    {item.title}
+                  </Button>
+                ))}
+              </Box>
+
+              <Box sx={{ ml: 'auto' }}>
+                <LanguageSwitcher />
+              </Box>
+            </Toolbar>
+          </Container>
         </AppBar>
       </ElevationScroll>
       <nav>
