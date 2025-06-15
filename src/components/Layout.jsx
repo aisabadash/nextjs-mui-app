@@ -1,4 +1,4 @@
-import AppNavBar from './AppNavbar';
+import AppNavBar from './AppNavBar';
 import SeoHead from './SeoHead';
 import { Container, Box } from '@mui/material';
 
