@@ -1,9 +1,17 @@
-const path = require('path');
+// const path = require('path');
+
+// module.exports = {
+//   i18n: {
+//     defaultLocale: 'uk',
+//     locales: ['uk', 'cs', 'en'],
+//   },
+//   localePath: path.resolve('./public/locales'),
+// };
 
 module.exports = {
   i18n: {
     defaultLocale: 'uk',
-    locales: ['uk', 'cs', 'en'],
+    locales: ['en', 'cs', 'uk'],
   },
-  localePath: path.resolve('./public/locales'),
+  localePath: './public/locales',
 };

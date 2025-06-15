@@ -1,13 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import { Box, Typography } from '@mui/material';
-import Layout from '@/components/Layout';
 import { getI18nStaticProps } from '@/lib/getI18nStaticProps';
 
 export default function ContactPage() {
   const { t } = useTranslation('common');
 
   return (
-    <Layout>
+
       <Box
         sx={{
           display: 'flex',
@@ -19,7 +18,7 @@ export default function ContactPage() {
       >
         <Typography variant="h3" gutterBottom>{t('contact-page.title')}</Typography>
       </Box>
-    </Layout>
+
   );
 }
 

@@ -1,58 +1,56 @@
 'use client';
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { useScrollTrigger } from '@mui/material';
 
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  Toolbar,
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Button,
+  useScrollTrigger,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const drawerWidth = 240;
 
-const ElevationScroll = (props) => {
-  const { children, window } = props;
-
+const ElevationScroll = ({ children, window }) => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
     target: window ? window() : undefined,
   });
 
-  return children
-    ? React.cloneElement(children, {
-        elevation: trigger ? 4 : 0,
-      })
-    : null;
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
 };
 
-const AppNavBar = (props) => {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { t, i18n } = useTranslation('common');
+const AppNavBar = ({ window }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useTranslation('common');
   const router = useRouter();
 
-  const navItems = React.useMemo(() => [
+  const navItems = [
     { title: t('nav.home'), url: '/' },
     { title: t('nav.about'), url: '/about' },
     { title: t('nav.program'), url: '/program' },
-    { title: t('nav.contact'), url: '/contact' }
-  ], [i18n.language]);
+    { title: t('nav.contact'), url: '/contact' },
+  ];
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
@@ -77,7 +75,7 @@ const AppNavBar = (props) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <ElevationScroll {...props}>
+      <ElevationScroll>
         <AppBar component="nav">
           <Toolbar>
             <IconButton
@@ -96,12 +94,15 @@ const AppNavBar = (props) => {
             >
               MUI
             </Typography>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
               {navItems.map((item) => (
                 <Button key={item.url} component={Link} href={item.url} sx={{ color: '#fff' }}>
                   {item.title}
                 </Button>
               ))}
+            </Box>
+            <Box sx={{ ml: 'auto' }}>
+              <LanguageSwitcher />
             </Box>
           </Toolbar>
         </AppBar>
@@ -112,9 +113,7 @@ const AppNavBar = (props) => {
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
+          ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
@@ -125,6 +124,10 @@ const AppNavBar = (props) => {
       </nav>
     </Box>
   );
+};
+
+AppNavBar.propTypes = {
+  window: PropTypes.func,
 };
 
 export default AppNavBar;

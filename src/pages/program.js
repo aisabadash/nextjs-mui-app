@@ -1,13 +1,11 @@
 import { useTranslation } from 'next-i18next';
 import { Box, Typography } from '@mui/material';
-import Layout from '@/components/Layout';
 import { getI18nStaticProps } from '@/lib/getI18nStaticProps';
 
 export default function ProgramPage() {
   const { t } = useTranslation('common');
 
   return (
-    <Layout>
       <Box
         sx={{
           display: 'flex',
@@ -19,7 +17,6 @@ export default function ProgramPage() {
       >
         <Typography variant="h3" gutterBottom>{t('program-page.title')}</Typography>
       </Box>
-    </Layout>
   );
 }
 
