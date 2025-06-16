@@ -68,6 +68,11 @@ const AppNavBar = ({ window }) => {
             </ListItemButton>
           </ListItem>
         ))}
+        {/* <ListItem disablePadding>
+          <ListItemButton sx={{ justifyContent: 'center' }}>
+            <LanguageSwitcher />
+          </ListItemButton>
+        </ListItem> */}
       </List>
     </Box>
   );
@@ -104,8 +109,8 @@ const AppNavBar = ({ window }) => {
                     {item.title}
                   </Button>
                 ))}
+                {/* <LanguageSwitcher /> */}
               </Box>
-
               <Box sx={{ ml: 'auto' }}>
                 <LanguageSwitcher />
               </Box>

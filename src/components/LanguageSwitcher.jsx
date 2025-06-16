@@ -1,86 +1,77 @@
 'use client';
 
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import {
-  IconButton,
-  Menu,
+  Box,
   MenuItem,
-  ListItemIcon,
-  Avatar,
+  Select,
 } from '@mui/material';
-import LanguageIcon from '@mui/icons-material/Language';
-import { useState } from 'react';
+import React from 'react';
+import Image from 'next/image';
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'cs', name: 'Čeština', flag: '🇨🇿' },
-  { code: 'uk', name: 'Українська', flag: '🇺🇦' },
+  { code: 'en', name: 'English', flag: '/GB.svg' },
+  { code: 'cs', name: 'Čeština', flag: '/CZ.svg' },
+  { code: 'uk', name: 'Українська', flag: '/UA.svg' },
 ];
 
-export default function LanguageSwitcher() {
+const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const currentLang = languages.find((lang) => lang.code === i18n.language) || languages[0];
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const changeLanguage = (lng) => {
+  const handleChange = (event) => {
+    const newLang = event.target.value;
     const { pathname, asPath, query } = router;
-    i18n.changeLanguage(lng);
-    router.push({ pathname, query }, asPath, { locale: lng });
-    handleClose();
+    i18n.changeLanguage(newLang);
+    router.push({ pathname, query }, asPath, { locale: newLang });
   };
 
   return (
-    <>
-      <IconButton
-        onClick={handleClick}
-        size="small"
-        aria-controls={open ? 'lang-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        color="inherit"
-      >
-        <LanguageIcon />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        id="lang-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            mt: 1.5,
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.15))',
-            '& .MuiAvatar-root': {
-              width: 24,
-              height: 24,
-              mr: 1,
-            },
+      <Select
+        id="language-select"
+        name="language"
+        value={currentLang.code}
+        onChange={handleChange}
+        variant="standard"
+        disableUnderline
+        sx={{
+          '& .MuiSelect-select': {
+            display: 'flex',
+            alignItems: 'center',
+          },
+          color: 'inherit',
+          backgroundColor: 'transparent',
+          '& .MuiSelect-icon': {
+            color: 'inherit',
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        MenuProps={{
+          disableScrollLock: true,
+          PaperProps: {
+            sx: { minWidth: 30 },
+          },
+        }}
       >
         {languages.map(({ code, name, flag }) => (
-          <MenuItem key={code} onClick={() => changeLanguage(code)}>
-            <ListItemIcon>
-              <Avatar sx={{ width: 24, height: 24 }}>{flag}</Avatar>
-            </ListItemIcon>
-            {name}
+          <MenuItem key={code} value={code}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              {flag && (
+                <Image
+                  src={flag}
+                  alt={name}
+                  width={20}
+                  height={12}
+                  style={{ objectFit: 'cover' }}
+                />
+              )}
+            </Box>
           </MenuItem>
         ))}
-      </Menu>
-    </>
+      </Select>
   );
-}
+};
+
+export default LanguageSwitcher;
